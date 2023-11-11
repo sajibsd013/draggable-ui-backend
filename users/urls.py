@@ -7,8 +7,9 @@ app_name = 'users'
 
 urlpatterns = [
     path('register', RegistrationView.as_view(), name='register'),
-    path('login', LoginView.as_view(), name='register'),
-    path('logout', LogoutView.as_view(), name='register'),
+    path('login', LoginView.as_view(), name='login'),
+    path('signin', LoginView.as_view(), name='signin'),
+    path('logout', LogoutView.as_view(), name='logout'),
 
     path('change-password', ChangePasswordView.as_view(), name='register'),
     path(
