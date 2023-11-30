@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import *
+from .models import CV
 
 
-# Register your models here.
+class CVAdmin(admin.ModelAdmin):
+    list_display = ["cv", "user", "created_date"]
 
+    class Meta:
+        model = CV
 
+admin.site.register(CV, CVAdmin)
 
