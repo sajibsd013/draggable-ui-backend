@@ -14,7 +14,13 @@ from rest_framework.permissions import IsAuthenticated
 @authentication_classes((JWTAuthentication,))
 def cv(request):
     if request.method == 'POST':
-        serializer = CVSerializer(data=request.data)
+        newdata = {
+            "cv": request.data['cv'],
+            "user": request.user.id
+        }
+
+        serializer = CVSerializer(data=newdata)
+        print(serializer.is_valid(), request.user.id, request.data['cv'])
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -41,8 +47,13 @@ def cv_detail(request, pk):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
+        newdata = {
+            "cv": request.data['cv'],
+            "user": request.user.id
+        }
+        print(newdata)
         serializer = CVSerializer(
-            data, data=request.data)
+            data, data=newdata)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
